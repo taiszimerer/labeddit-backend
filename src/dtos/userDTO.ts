@@ -1,6 +1,6 @@
 
 export interface SignupInputDTO {
-    name: unknown,
+    nickname: unknown,
     email: unknown,
     password: unknown
 

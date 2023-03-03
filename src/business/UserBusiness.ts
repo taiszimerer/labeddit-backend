@@ -6,7 +6,7 @@ import { User } from "../models/User";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
-import { TokenPayload, UserDB, USER_ROLES } from "../types";
+import { TokenPayload, UserDB} from "../types";
 
 export class UserBusiness {
     constructor(
@@ -18,9 +18,9 @@ export class UserBusiness {
     ) { }
 
     public singup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
-        const { name, email, password } = input
+        const { nickname, email, password } = input
 
-        if (typeof name !== "string") {
+        if (typeof nickname !== "string") {
             throw new BadRequestError("'name' deve ser string")
         }
 
@@ -34,16 +34,14 @@ export class UserBusiness {
 
         const id = this.idGenerator.generate()
         const hashedPassword = await this.hashManager.hash(password)
-        const role = USER_ROLES.NORMAL
         const createdAt = new Date().toISOString()
 
 
         const newUser = new User(
             id,
-            name,
+            nickname,
             email,
             hashedPassword,
-            role,
             createdAt
         )
 
@@ -52,8 +50,7 @@ export class UserBusiness {
 
         const payload: TokenPayload = {
             id: newUser.getId(),
-            name: newUser.getName(),
-            role: newUser.getRole()
+            name: newUser.getName()
         }
 
         const token = this.tokenManager.createToken(payload)
@@ -85,10 +82,9 @@ export class UserBusiness {
 
         const user = new User(
             userDB.id, 
-            userDB.name, 
+            userDB.nickname, 
             userDB.email,
             userDB.password, 
-            userDB.role, 
             userDB.created_at
         )
         const hashedPassword = user.getPassword()
@@ -102,8 +98,7 @@ export class UserBusiness {
 
         const payload: TokenPayload = {
             id: user.getId(),
-            name: user.getName(),
-            role: user.getRole()
+            name: user.getName()
         }
 
         const token = this.tokenManager.createToken(payload)

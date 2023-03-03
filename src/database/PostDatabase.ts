@@ -13,7 +13,7 @@ export class PostDatabase extends BaseDatabase {
                 "posts.content",
                 "posts.created_at",
                 "posts.updated_at",
-                "users.name AS creator_name"
+                "users.nickname AS creator_name"
             )
             .join("users", "posts.creator_id", "=", "users.id")
 
@@ -63,7 +63,7 @@ export class PostDatabase extends BaseDatabase {
                 "posts.content",
                 "posts.created_at",
                 "posts.updated_at",
-                "users.name AS creator_name"
+                "users.nickname AS creator_name"
             )
             .join("users", "posts.creator_id", "=", "users.id")
             .where("post.id", postId)

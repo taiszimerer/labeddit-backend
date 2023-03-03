@@ -5,7 +5,7 @@ import { NotFoundError } from "../errors/NotFoundError";
 import { Post } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
-import { PostWithCreatorsDB, USER_ROLES } from "../types";
+import { PostWithCreatorsDB} from "../types";
 
 export class PostBusiness {
     constructor(
@@ -150,14 +150,6 @@ export class PostBusiness {
 
         const creatorId = payload.id
 
-        if (payload.role !== USER_ROLES.ADMIN 
-            &&
-            postDB.creator_id !== creatorId){
-            throw new BadRequestError("Somente o criador do post pode deleta-lo.") 
-        }
-
         await this.postDatabase.delete(idToDelete)
     }
-
-
 }
