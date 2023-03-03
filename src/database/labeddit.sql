@@ -2,18 +2,16 @@
  CREATE TABLE 
 users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    name TEXT NOT NULL,
+    nickname TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    role TEXT NOT NULL,
-    created_at TEXT DEFAULT (DATETIME()) NOT NULL
+    password TEXT NOT NULL
 );
 
-INSERT INTO users (id, name, email, password, role)
+INSERT INTO users (id, nickname, email, password)
 VALUES
-	("nick01","tais01", "tais@email.com", "tais123", "role"),
-	("nick02","labaluno13", "joao@email.com", "joao123", "role"),
-	("nick03","labaluno55", "lucas@email.com", "lucas123", "role");
+	("nick01","tais01", "tais@email.com", "tais123"),
+	("nick02","labaluno13", "joao@email.com", "joao123"),
+	("nick03","labaluno55", "lucas@email.com", "lucas123");
 
 DROP TABLE users;
 
