@@ -14,14 +14,13 @@ export class UserBusiness {
         private idGenerator: IdGenerator,
         private tokenManager: TokenManager,
         private hashManager: HashManager
-
     ) { }
 
     public singup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
         const { nickname, email, password } = input
 
         if (typeof nickname !== "string") {
-            throw new BadRequestError("'name' deve ser string")
+            throw new BadRequestError("'nickname' deve ser string")
         }
 
         if (typeof email !== "string") {
@@ -35,7 +34,6 @@ export class UserBusiness {
         const id = this.idGenerator.generate()
         const hashedPassword = await this.hashManager.hash(password)
         const createdAt = new Date().toISOString()
-
 
         const newUser = new User(
             id,
