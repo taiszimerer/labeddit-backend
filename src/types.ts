@@ -1,12 +1,7 @@
-export enum USER_ROLES {
-    NORMAL = "NORMAL",
-    ADMIN = "ADMIN"
-}
 
 export interface TokenPayload {
     id: string,
-    name: string,
-    role: USER_ROLES
+    name: string
 }
 
 export interface PostModel {
@@ -34,18 +29,16 @@ export interface PostWithCreatorsDB extends PostDB {
 
 export interface UserDB {
     id: string,
-    name: string,
+    nickname: string,
     email: string,
     password: string,
-    role: USER_ROLES,
     created_at: string
 }
 
 export interface UserModel {
     id: string,
-    name: string,
+    nickname: string,
     email: string,
     password: string,
-    role: USER_ROLES,
     createdAt: string
 }

@@ -11,7 +11,7 @@ export class UserController {
     public singup = async (req: Request, res: Response) => {
         try {
             const input: SignupInputDTO = {
-                name: req.body.name,
+                nickname: req.body.nickname,
                 email: req.body.email,
                 password: req.body.password,
             }
